@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<header th:replace="templatesInjected/header :: header"></header>
+<h1>HOME</h1>
+<p th:text="${title}"></p>
+<h1 th:text="${message}"></h1>
+<p th:text="${individuo}"></p>
+<p th:text="${individuo.name}"></p>
+<div th:if="${individuos != null and !individuos.isEmpty()}">
+    <table border="2">
+        <tr>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Modificar</th>
+            <th>Eliminar</th>
+        </tr>
+        <tr th:each="individuo : ${individuos}">
+            <td th:text="${individuo.name}"></td>
+            <td th:text="${individuo.lastName}"></td>
+            <td th:text="${individuo.age}"></td>
+            <td><a th:href="@{/edit/}+${individuo.id}" th:text="Editar"></a></td>
+            <td><a th:href="@{/delete/}+${individuo.id}" th:text="Eliminar"></a></td>
+        </tr>
+    </table>
+</div>
+<a th:href="@{/add}">Add Individuo</a>
+<footer th:replace="templatesInjected/footer :: footer"></footer>
+</body>
+</html>
